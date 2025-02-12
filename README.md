@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+#### Recruify
+The recruify project aims to develop a Interview sheduler Management website, leveraging modern technologies to enhance interview scheduling efficiency, and best user experience.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Recruify - Summary  
+Recruify is an interview scheduling and management application designed to streamline the interview process for HR professionals and recruiters. Built with modern technologies, Recruify offers a seamless user experience for scheduling, managing, and tracking interviews efficiently.  
 
-## Available Scripts
+## Core Features  
 
-In the project directory, you can run:
+### 1. Interview Scheduling  
+- Schedule interviews with key details:  
+  - **Candidate name**  
+  - **Interviewer name**  
+  - **Date and time slot selection**  
+  - **Interview type** (Technical, HR, Behavioral)  
+- Check for conflicts and avoid overlapping interviews for the same candidate or interviewer.  
+- Support for multiple time zones.  
 
-### `npm start`
+### 2. Interview Dashboard  
+- View all scheduled interviews in a calendar or timeline format using `react-big-calendar`.  
+- Filter interviews by **date**, **interviewer**, or **candidate** for easy navigation.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 3. Rescheduling and Editing  
+- Update interview details like time slot, interviewer, or interview type.  
+- Persist changes in **localStorage** or a **mock API** for data consistency.  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 4. Deleting Interviews  
+- Delete scheduled interviews with a confirmation step.  
+- Display success or error notifications on scheduling, updating, and deleting interviews.  
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Notifications and Alerts  
+- Instant feedback through **success/error messages** for user actions like scheduling, rescheduling, or deleting interviews.  
 
-### `npm run build`
+## Responsive Design  
+Recruify is fully responsive and optimized for both desktop and mobile devices, ensuring a seamless experience across different screen sizes.  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Technology Stack  
+- **React** with functional components and hooks  
+- **Zustand** for state management  
+- **React Router** for navigation between pages (Dashboard, Schedule Interview, Edit Interview)  
+- **Styled-Components** for consistent and modern UI styling  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Bonus Features  
+- **Time Zone Handling**: Schedule interviews across different time zones, ensuring clarity for both interviewers and candidates.  
+- **Library Integration**: Use `react-big-calendar` for timeline and calendar views.  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Run the project Process
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Guidelines
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. **Clone the Repository:** Clone the project repository to your local development environment using the following command:
+   ```
+   git clone https://github.com/MahdiManik/recruify.git
+   ```
+2. **Run the command:** Open your termonal and run this command:
+   ```
+   npm i -f
+   ```
+   or
+   ```
+   npm install
+   ```
+3. **Run the project:** For run this project need to run this command
+    ```
+   npm run dev
+   ```
+   or
+   ```
+   npm run start
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<!-- ------------------DEVELOPED BY Mahdi Hasan------------------- -->
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Thanks again!
