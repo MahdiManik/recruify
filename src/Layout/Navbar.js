@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../asset/logo.png";
+import logo from "../assets/logo.png";
 
 const Nav = styled.nav`
   display: flex;
@@ -12,7 +12,6 @@ const Nav = styled.nav`
   left: 0;
   width: 100%;
   background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 10px 0;
   transition: all 0.3s ease;
   height: ${({ isOpen }) => (isOpen ? "auto" : "0")};
@@ -25,7 +24,7 @@ const Nav = styled.nav`
     font-weight: 500;
 
     &:hover {
-      color: #007bff;
+      color: #3d8e3a;
     }
   }
 
@@ -47,7 +46,7 @@ const Header = styled.header`
   align-items: center;
   padding: 20px;
   background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 `;
 
 const LogoPart = styled.div`
@@ -105,8 +104,8 @@ export default function Navbar() {
         </Hamburger>
         <Nav isOpen={menuOpen}>
           <NavLink to="/" onClick={() => setMenuOpen(false)}>Home</NavLink>
-          <NavLink to="/create" onClick={() => setMenuOpen(false)}>Create</NavLink>
-          <NavLink to="/edit" onClick={() => setMenuOpen(false)}>Edit</NavLink>
+          <NavLink to="/dashboard" onClick={() => setMenuOpen(false)}>Dashboard</NavLink>
+          <NavLink to="/schedule" onClick={() => setMenuOpen(false)}>Schedule</NavLink>
         </Nav>
       </Header>
     </div>
