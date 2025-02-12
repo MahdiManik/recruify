@@ -1,28 +1,3 @@
-// import useInterviewStore from "../store/interviewStore";
-// import { Link } from "react-router-dom";
-
-// export default function Home() {
-//   const { interviews, deleteInterview } = useInterviewStore();
-
-//   return (
-//     <div>
-//       <h2>Scheduled Interviews</h2>
-//       {interviews.length === 0 ? <p>No interviews scheduled.</p> : null}
-//       <ul>
-//         {interviews.map((interview) => (
-//           <li key={interview.id}>
-//             {interview.candidate} with {interview.interviewer} on {interview.date} at {interview.time} ({interview.type})
-//             <button onClick={() => deleteInterview(interview.id)}>Delete</button>
-//             <Link to={`/edit/${interview.id}`}>Edit</Link>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
-
-// Install styled-components if you haven't: npm install styled-components
-
 import React from "react";
 import styled from "styled-components";
 import heroBg from "../../assets/bg1.jpg";

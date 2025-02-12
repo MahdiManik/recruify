@@ -1,10 +1,10 @@
 // components/Dashboard.js
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { FaCalendarAlt, FaEdit, FaTrashAlt, FaPlus } from 'react-icons/fa';
-import useInterviewStore from '../store/useScheduleStore';
-import Button from '../components/Shared/Button';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { FaCalendarAlt, FaEdit, FaTrashAlt, FaPlus } from "react-icons/fa";
+import useInterviewStore from "../store/useScheduleStore";
+import Button from "../components/Shared/Button";
 
 // Styled Components
 const Container = styled.div`
@@ -23,7 +23,6 @@ const Title = styled.h1`
   font-weight: bold;
   color: #1a1a1a;
 `;
-
 
 const FilterContainer = styled.div`
   display: grid;
@@ -53,7 +52,7 @@ const FilterSelect = styled.select`
   border: 1px solid #e5e7eb;
   border-radius: 0.375rem;
   width: 100%;
-  
+
   &:focus {
     outline: none;
     border-color: #3b82f6;
@@ -148,15 +147,15 @@ const EmptyMessage = styled.p`
 function Dashboard() {
   const navigate = useNavigate();
   const [filter, setFilter] = useState({
-    date: '',
-    interviewer: '',
-    type: ''
+    date: "",
+    interviewer: "",
+    candidate: "",
   });
-  
+
   const { deleteInterview, getFilteredInterviews } = useInterviewStore();
-  
+
   const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this interview?')) {
+    if (window.confirm("Are you sure you want to delete this interview?")) {
       deleteInterview(id);
     }
   };
@@ -167,8 +166,7 @@ function Dashboard() {
     <Container>
       <Header>
         <Title>Interview Dashboard</Title>
-        <Button
-         onClick={() => navigate('/schedule')}>
+        <Button onClick={() => navigate("/schedule")}>
           <FaPlus size={14} />
           Schedule New Interview
         </Button>
@@ -183,41 +181,43 @@ function Dashboard() {
         <FilterInput
           type="text"
           placeholder="Filter by interviewer..."
-          value={filter.interviewer}
-          onChange={(e) => setFilter({ ...filter, interviewer: e.target.value })}
+          value={filter?.interviewer}
+          onChange={(e) =>
+            setFilter({ ...filter, interviewer: e.target.value })
+          }
         />
-        <FilterSelect
-          value={filter.type}
-          onChange={(e) => setFilter({ ...filter, type: e.target.value })}
-        >
-          <option value="">All Types</option>
-          <option value="Technical">Technical</option>
-          <option value="HR">HR</option>
-          <option value="Behavioral">Behavioral</option>
-        </FilterSelect>
+        <FilterInput
+          type="text"
+          placeholder="Filter by candidate..."
+          value={filter?.candidate}
+          onChange={(e) =>
+            setFilter({ ...filter, candidate: e.target.value })
+          }
+        />
       </FilterContainer>
-
       <InterviewGrid>
-        {filteredInterviews.map(interview => (
+        {filteredInterviews.map((interview) => (
           <InterviewCard key={interview.id}>
             <CardContent>
               <CardInfo>
                 <CandidateName>{interview.candidateName}</CandidateName>
-                <InterviewerInfo>Interviewer: {interview.interviewerName}</InterviewerInfo>
+                <InterviewerInfo>
+                  Interviewer: {interview.interviewerName}
+                </InterviewerInfo>
                 <DateInfo>
                   <FaCalendarAlt size={14} />
-                  {new Date(interview.date).toLocaleDateString()} at {interview.timeSlot}
+                  {new Date(`${interview.date}T${interview.timeSlot}`).toLocaleString()} 
                 </DateInfo>
                 <TypeBadge>{interview.type}</TypeBadge>
               </CardInfo>
               <ButtonGroup>
-                <IconButton 
+                <IconButton
                   className="edit"
                   onClick={() => navigate(`/edit/${interview.id}`)}
                 >
                   <FaEdit size={16} />
                 </IconButton>
-                <IconButton 
+                <IconButton
                   className="delete"
                   onClick={() => handleDelete(interview.id)}
                 >

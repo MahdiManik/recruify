@@ -1,24 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "./Shared/Button";
 import { toast } from "react-hot-toast";
-import useInterviewStore from "../store/useScheduleStore";
-import TimeSlotSelected from "./TimeSlot";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import useInterviewStore from "../store/useScheduleStore";
+import CalendarView from "./CalenderView";
+import timeZones from "../data/TimeZones";
+import { fromZonedTime } from 'date-fns-tz';
 
 const Section = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+
   background-color: ${({ dark }) => (dark ? "#1a202c" : "#f4f4f4")};
-  padding: 80px 10px;
+  
 `;
 const DatePickerWrapper = styled.div`
   margin-bottom: 20px;
   .react-datepicker-wrapper {
-    width: 100%;
+    width: 99%;
   }
   .react-datepicker__input-container input {
     width: 100%;
@@ -35,12 +37,13 @@ const Container = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 40px;
   width: 100%;
-  max-width: 500px;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  max-width: 80%;
+  margin: 40px auto;
 `;
 
 const Label = styled.label`
@@ -61,10 +64,16 @@ const Select = styled.select`
 `;
 
 const Title = styled.h1`
-  font-size: 24px;
+  font-size: 34px;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 20px;
+  margin: 40px auto;
+`;
+const Border = styled.div`
+  border-bottom: 1px solid green;
+  border-radius: 12px;
+  width: 24%;
+  margin: 0px auto;
 `;
 
 export default function ScheduleInterview() {
@@ -72,8 +81,29 @@ export default function ScheduleInterview() {
   const [interviewer, setInterviewer] = useState("");
   const [timeSlot, setTimeSlot] = useState("");
   const [interviewType, setInterviewType] = useState("");
-  const { addInterview, validateConflict } = useInterviewStore();
+  const { addInterview, checkConflicts, interviews } = useInterviewStore();
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
+  const [selectedTimeZone, setSelectedTimeZone] = useState('UTC');
+
+  useEffect(() => {
+    // Function to get available time slots
+    const getAvailableTimeSlots = () => {
+      const timeSlots = [
+        "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"
+      ]; // Define your time slots here
+      const unavailableSlots = interviews
+        .filter(interview => interview.date === selectedDate.toISOString().split('T')[0] && 
+          (interview.interviewerName === interviewer || interview.candidateName === candidate))
+        .map(interview => interview.timeSlot);
+
+      const availableSlots = timeSlots.filter(slot => !unavailableSlots.includes(slot));
+      setAvailableTimeSlots(availableSlots);
+    };
+
+    getAvailableTimeSlots();
+  }, [selectedDate, interviewer, candidate, interviews]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -87,8 +117,11 @@ export default function ScheduleInterview() {
       toast.error("Please fill all fields.");
       return;
     }
+    const interviewDateTime = new Date(`${selectedDate.toISOString().split('T')[0]}T${timeSlot}`);
+    const utcDateTime = fromZonedTime(interviewDateTime, selectedTimeZone);
+    console.log(utcDateTime);
 
-    if (validateConflict(interviewer, candidate, selectedDate, timeSlot)) {
+    if (checkConflicts(interviewer, candidate, utcDateTime, timeSlot)) {
       toast.error("Conflict detected! Please choose a different time slot.");
       return;
     }
@@ -96,23 +129,30 @@ export default function ScheduleInterview() {
     addInterview({
       candidate,
       interviewer,
-      selectedDate,
+      date: selectedDate.toISOString().split('T')[0], 
       timeSlot,
       interviewType,
+      timeZone: selectedTimeZone,
     });
     toast.success("Interview scheduled successfully!");
 
     setCandidate("");
     setInterviewer("");
-    setSelectedDate("");
+    setSelectedDate(new Date());
     setTimeSlot("");
     setInterviewType("");
+    setSelectedTimeZone('UTC');
   };
+
 
   return (
     <Section>
       <Container>
+        <Title>Display available time slots</Title>
+        <Border />
+        <CalendarView />
         <Title>Schedule an Interview</Title>
+        <Border />
         <Form onSubmit={handleSubmit}>
           <Label>Candidate Name</Label>
           <Select
@@ -147,13 +187,26 @@ export default function ScheduleInterview() {
             />
           </DatePickerWrapper>
 
-          <TimeSlotSelected
-            selectedDate={selectedDate}
-            interviewer={interviewer}
-            candidate={candidate}
-            selectedTimeSlot={timeSlot}
-            onTimeSlotSelect={setTimeSlot}
-          />
+          <Label>Time Zone</Label>
+          <Select
+            value={selectedTimeZone}
+            onChange={(e) => setSelectedTimeZone(e.target.value)}
+          >
+            {timeZones.map(zone => (
+              <option key={zone.value} value={zone.value}>{zone.label}</option>
+            ))}
+          </Select>
+
+          <Label>Available Time Slots</Label>
+          <Select
+            value={timeSlot}
+            onChange={(e) => setTimeSlot(e.target.value)}
+          >
+            <option value="">Select Time Slot</option>
+            {availableTimeSlots.map(slot => (
+              <option key={slot} value={slot}>{slot}</option>
+            ))}
+          </Select>
 
           <Label>Interview Type</Label>
           <Select
