@@ -1,10 +1,9 @@
 // components/CalendarView.js
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import { format, parse, startOfWeek, getDay } from 'date-fns';
 import styled from 'styled-components';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { useNavigate } from 'react-router-dom';
 import useInterviewStore from '../store/useScheduleStore';
 
 // Styled Components
@@ -83,10 +82,10 @@ const localizer = dateFnsLocalizer({
 const EventComponent = ({ event, selectedSlots }) => {
   const isSelected = selectedSlots.includes(event.start);
   return (
-    <EventWrapper style={{ backgroundColor: isSelected ? 'red' : 'blue' }}>
-      <strong>{event.title}</strong>
+    <EventWrapper style={{ backgroundColor: isSelected ? 'green' : 'red' }}>
+      <strong>{event.timeSlot}</strong>
       <br />
-      <small>{event.interviewerName}</small>
+      <small>{event.interviewer}</small> 
       {isSelected && <span> (Unavailable)</span>}
     </EventWrapper>
   );

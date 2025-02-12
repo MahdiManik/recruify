@@ -91,25 +91,25 @@ export default function Feature() {
           <FaGlobe />
           <CardTitle>Schedule Interviews</CardTitle>
           <CardDescription>Efficient and user-friendly interview scheduling</CardDescription>
-          <ActionLink href="#">Book Now</ActionLink>
+          <ActionLink href="/schedule">Book Now</ActionLink>
         </Card>
         <Card>
           <FaCalendarAlt />
           <CardTitle>Interview Scheduler</CardTitle>
           <CardDescription>Simplify the interview scheduling process</CardDescription>
-          <ActionLink href="#">Schedule Now</ActionLink>
+          <ActionLink href="/schedule">Schedule Now</ActionLink>
         </Card>
         <Card>
           <FaPhone />
           <CardTitle>Scheduling Platform</CardTitle>
           <CardDescription>Modern platform for interview scheduling</CardDescription>
-          <ActionLink href="#">Start Scheduling</ActionLink>
+          <ActionLink href="/schedule">Start Scheduling</ActionLink>
         </Card>
         <Card>
           <FaFolderOpen />
           <CardTitle>Interview Manager</CardTitle>
           <CardDescription>Manage interviews seamlessly</CardDescription>
-          <ActionLink href="#">Manage Now</ActionLink>
+          <ActionLink href="/dashboard">Manage Now</ActionLink>
         </Card>
       </CardGrid>
     </Container>

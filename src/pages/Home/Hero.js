@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Button from "../../components/Shared/Button";
 import hr from "../../assets/hr.jpg.webp";
+import { Link } from "react-router-dom";
 
 const HeroSection = styled.section`
  @media (min-width: 768px) {
@@ -23,27 +24,28 @@ const HeroSection = styled.section`
 `;
 
 const Content = styled.div`
- @media (min-width: 768px) {
-  flex: 1;
-  max-width: 600px;
-} 
+  @media (min-width: 768px) {
+    flex: 1;
+    max-width: 600px;
+  }
 `;
 
 const Title = styled.h1`
- @media (min-width: 768px) {
-   font-size: 36px;
-  color: #113c3c;
-  font-weight: 600;
-  margin-bottom: 12px;}
+  @media (min-width: 768px) {
+    font-size: 36px;
+    color: #113c3c;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
   font-size: 24px;
 `;
 
 const Subtitle = styled.p`
- @media (min-width: 768px) {
-  font-size: 18px;
-  color: #4a4a4a;
-  margin-bottom: 20px;
-}
+  @media (min-width: 768px) {
+    font-size: 18px;
+    color: #4a4a4a;
+    margin-bottom: 20px;
+  }
   font-size: 14px;
   margin-bottom: 25px;
 `;
@@ -65,9 +67,12 @@ const Hero = () => {
         <Content>
           <Title>Schedule and manage interviews</Title>
           <Subtitle>
-            An intuitive platform to schedule and manage interviews with a clean and modern user interface.
+            An intuitive platform to schedule and manage interviews with a clean
+            and modern user interface.
           </Subtitle>
-          <Button>Schedule</Button>
+          <Link to="/schedule">
+            <Button>Schedule</Button>
+          </Link>
         </Content>
         <ImageContainer>
           <img src={hr} alt="Professional Woman" />

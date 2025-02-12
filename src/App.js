@@ -3,6 +3,7 @@ import Home from "./pages/Home/Home";
 import MainLayout from "./Layout/MainLayout";
 import ScheduleInterview from "./components/ScheduleInterview";
 import Dashboard from "./pages/Dashboard";
+import EditInterview from "./pages/EditInterview";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="schedule" element={<ScheduleInterview />} />
-        {/* <Route path="edit/:id" element={<EditInterview />} /> */}
+        <Route path="edit/:id" element={<EditInterview />} />
         </Route>
       </Routes>
     </Router>

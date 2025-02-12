@@ -9,7 +9,7 @@ import CalendarView from "./CalenderView";
 import timeZones from "../data/TimeZones";
 import { fromZonedTime } from 'date-fns-tz';
 
-const Section = styled.section`
+export const Section = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +17,7 @@ const Section = styled.section`
   background-color: ${({ dark }) => (dark ? "#1a202c" : "#f4f4f4")};
   
 `;
-const DatePickerWrapper = styled.div`
+export const DatePickerWrapper = styled.div`
   margin-bottom: 20px;
   .react-datepicker-wrapper {
     width: 99%;
@@ -31,7 +31,7 @@ const DatePickerWrapper = styled.div`
   }
 `;
 
-const Container = styled.div`
+export const Container = styled.div`
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -39,19 +39,19 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const Form = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   max-width: 80%;
   margin: 40px auto;
 `;
 
-const Label = styled.label`
+export const Label = styled.label`
   font-weight: bold;
   margin-bottom: 5px;
 `;
 
-const Select = styled.select`
+export const Select = styled.select`
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -63,13 +63,13 @@ const Select = styled.select`
   }
 `;
 
-const Title = styled.h1`
+export const Title = styled.h1`
   font-size: 34px;
   font-weight: bold;
   text-align: center;
   margin: 40px auto;
 `;
-const Border = styled.div`
+export const Border = styled.div`
   border-bottom: 1px solid green;
   border-radius: 12px;
   width: 24%;
@@ -119,7 +119,6 @@ export default function ScheduleInterview() {
     }
     const interviewDateTime = new Date(`${selectedDate.toISOString().split('T')[0]}T${timeSlot}`);
     const utcDateTime = fromZonedTime(interviewDateTime, selectedTimeZone);
-    console.log(utcDateTime);
 
     if (checkConflicts(interviewer, candidate, utcDateTime, timeSlot)) {
       toast.error("Conflict detected! Please choose a different time slot.");
@@ -143,7 +142,6 @@ export default function ScheduleInterview() {
     setInterviewType("");
     setSelectedTimeZone('UTC');
   };
-
 
   return (
     <Section>
